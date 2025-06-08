@@ -1,0 +1,370 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <iomanip>
+#include <sstream>
+#include <cstdlib>
+#include <vector>
+
+using namespace std;
+
+
+class thongtinsach {
+	
+	
+private:
+    string mahang;
+    string tensach;
+    string ngonngu;
+    string namSX;
+    string nuocSX;
+    string tacgia;
+    string loaisach;
+
+public:
+
+    thongtinsach(string _mahang, string _tensach, string _ngonngu, string _namSX,
+                 string _nuocSX, string _tacgia, string _loaisach)
+        : mahang(_mahang), tensach(_tensach), ngonngu(_ngonngu),
+          namSX(_namSX), nuocSX(_nuocSX), tacgia(_tacgia), loaisach(_loaisach) {}
+
+    string getmasach() const { return mahang; }
+    string gettensach() const { return tensach; }
+    string getngonngu() const {return ngonngu;}
+    string gettacgia () const {return tacgia;}
+    
+
+    void hienthithongtinsach() const {
+        cout << "Ma sach: " << mahang << endl;
+        cout << "Ten sach: " << tensach << endl;
+        cout << "Ngon ngu cua sach: " << ngonngu << endl;
+        cout << "Nam san xuat: " << namSX << endl;
+        cout << "Nuoc san xuat: " << nuocSX << endl;
+        cout << "Tac gia: " << tacgia << endl;
+        cout << "Loai sach: " << loaisach << endl;
+        cout << "--------------------------"<<endl;
+    }
+    void capNhat() {
+        cout << "Nhap thong tin moi cho sach co ma: " << mahang << endl;
+        cout << "Ten sach: "; getline(cin, tensach);
+        cout << "Ngon ngu: "; getline(cin, ngonngu);
+        cout << "Nam san xuat: "; getline(cin, namSX);
+        cout << "Nuoc san xuat: "; getline(cin, nuocSX);
+        cout << "Tac gia: "; getline(cin, tacgia);
+        cout << "Loai sach: "; getline(cin, loaisach);
+    }
+};
+    
+    void capNhatThongTinSach(vector<thongtinsach>& danhSach) {
+    cin.ignore(); 
+    string maCanCapNhat;
+    cout << "Nhap ma sach can cap nhat: ";
+    getline(cin, maCanCapNhat);
+
+    bool timThay = false;
+    for (int i = 0; i < danhSach.size(); ++i) {
+        if (danhSach[i].getmasach() == maCanCapNhat) {
+            cout << "Tim thay sach:";
+            danhSach[i].hienthithongtinsach();
+            danhSach[i].capNhat();
+            cout << "Cap nhat thanh cong!";
+            timThay = true;
+            break;
+        }
+    }
+
+    if (!timThay) {
+        cout << "Khong tim thay sach co ma: " << maCanCapNhat << endl;
+    }
+}
+     void xoaSachTheoMa(vector<thongtinsach>& danhSach) {
+    cin.ignore(); 
+    string maCanXoa;
+    cout << "Nhap ma sach can xoa: ";
+    getline(cin, maCanXoa);
+
+    bool timThay = false;
+    for (int i = 0; i < danhSach.size(); ++i) {
+        if (danhSach[i].getmasach() == maCanXoa) {
+            cout << "---------Thong tin sach tim thay ------------1"<< endl; 
+            danhSach[i].hienthithongtinsach();
+
+            char xacNhan;
+            cout << "Ban co chac chan muon xoa sach nay? (y/n): ";
+            cin >> xacNhan;
+            cin.ignore(); 
+
+            if (xacNhan == 'y' || xacNhan == 'Y') {
+                danhSach.erase(danhSach.begin() + i);
+                cout << "Da xoa sach thanh cong!!! "<<endl;
+            } else {
+                cout << "Da huy xoa sach!!!" << endl; 
+            }
+
+            timThay = true;
+            break;
+        }
+    }
+
+    if (!timThay) {
+        cout << "Khong tim thay sach co ma: " << maCanXoa << endl;
+    }
+}
+   void timkiemsach (vector <thongtinsach>& danhSach){
+   	int Z ;
+   	cout << " Ban muon tim sach theo {ma sach (1), ten sach (2), Ngon ngu (3), Tac gia (4)} : " ;
+   	cin >> Z; 
+   	if (Z == 2){	
+   	 cin.ignore (); 
+   	   string sachcantim;
+   	   cout <<" Nhap Sach can tim :" ;
+   	  getline (cin, sachcantim) ; 
+   	   
+   	     bool datimthay = false ;
+   	 for (int i = 0; i < danhSach.size () ; ++i){
+   	 	if (danhSach[i].gettensach() == sachcantim) {
+            cout << "---------Thong tin sach tim thay ------------1"<< endl; 
+            danhSach[i].hienthithongtinsach();
+            datimthay = true ;}
+        }
+             if (!datimthay) {
+        cout << "Khong tim thay sach co ten: " << sachcantim << endl;
+    }
+   	 	
+   } 
+    if (Z==1){
+    	cin.ignore (); 
+   	   string masachcantim;
+   	   cout <<" Nhap ma Sach can tim :" ;
+   	  getline (cin,masachcantim) ; 
+   	   
+   	     bool datimthay = false ;
+   	 for (int i = 0; i < danhSach.size () ; ++i){
+   	 	if (danhSach[i].getmasach() == masachcantim) {
+            cout << "---------Thong tin sach tim thay ------------1"<< endl; 
+            danhSach[i].hienthithongtinsach();
+            datimthay = true ;}
+    	
+	} 
+	 if (!datimthay) {
+        cout << "Khong tim thay sach co Ma: " << masachcantim << endl;
+    }
+}
+    if (Z==3) {
+    	cin.ignore (); 
+   	   string ngonngusach;
+   	   cout <<" Nhap ngon ngu sach can tim :" ;
+   	  getline (cin,ngonngusach) ; 
+   	   
+   	     bool datimthay = false ;
+   	 for (int i = 0; i < danhSach.size () ; ++i){
+   	 	if (danhSach[i].getngonngu() == ngonngusach) {
+            cout << "---------Thong tin sach tim thay ------------1"<< endl; 
+            danhSach[i].hienthithongtinsach();
+            datimthay = true ;}
+    	
+	} 
+	 if (!datimthay) {
+        cout << "Khong tim thay ngon ngu : " << ngonngusach << endl;
+	}
+}
+    if (Z==4 ){
+    	cin.ignore (); 
+   	   string tacgiasach;
+   	   cout <<" Nhap Tac gia can tim :" ;
+   	  getline (cin,tacgiasach) ; 
+   	   
+   	     bool datimthay = false ;
+   	 for (int i = 0; i < danhSach.size () ; ++i){
+   	 	if (danhSach[i].gettacgia() == tacgiasach) {
+            cout << "---------Thong tin sach tim thay ------------1"<< endl; 
+            danhSach[i].hienthithongtinsach();
+            datimthay = true ;}
+    	
+	} 
+	 if (!datimthay) {
+        cout << "Khong tim thay Tac gia : " << tacgiasach << endl;
+	}
+    	
+	} 
+}
+class userinfo{
+    private:
+    string name;
+    string birthdate;
+    string phonenumber;
+    string usercode;
+    public:
+    string line;
+    string ucode;
+    string newphonenum;
+    string uname;
+    void nhap(){
+        cout << "Nhap ten:";
+        cin.ignore();
+        getline(cin, name);
+        cout << "Nhap ngay sinh:";
+        getline(cin, birthdate);
+        cout << "Nhap so dien thoai:";
+        getline(cin, phonenumber);
+        cout << "Nhap ma nguoi dung:";
+        getline(cin, usercode);
+        ofstream sfile(("project.txt"), ios::app);
+        sfile << '\n'<< setw(10) << left << usercode << setw(10) << left << name
+        << setw(15) << birthdate << setw(15) << phonenumber;
+        sfile.close();
+    }
+    void xoa(){
+        cout << "Nhap ma nguoi dung:";
+        cin.ignore();
+        getline(cin, ucode);
+        ifstream sfile("project.txt");
+        ofstream tfile("tempfile.txt");
+        while(getline(sfile, line)){
+            stringstream ss(line);
+            ss >> usercode;
+            if(usercode != ucode){
+                tfile << line << endl;
+            }
+        }
+        sfile.close();
+        tfile.close();
+
+        remove("project.txt");
+        rename("tempfile.txt", "project.txt");
+    }
+    void sua(){
+        cout << "Nhap ma nguoi dung:";
+        cin.ignore();
+        getline(cin, ucode);
+        cout << "Nhap ten nguoi dung:";
+        getline(cin, uname);
+        cout << "Nhap so dien thoai moi:";
+        getline(cin, newphonenum);
+        ifstream sfile("project.txt");
+        ofstream tfile("tempfile.txt");
+        while(getline(sfile, line)){
+            stringstream ss(line);
+            ss >> usercode >> name >> birthdate >> phonenumber;
+            if(usercode == ucode && name == uname){
+                phonenumber = newphonenum;
+                tfile << setw(10) << left << usercode << setw(10) << left << name
+                        << setw(15) << birthdate << setw(15) << phonenumber << endl;
+            }
+            else{
+                tfile << line << endl;
+            }
+        }
+        sfile.close();
+        tfile.close();
+
+        remove("project.txt");
+        rename("tempfile.txt", "project.txt");
+    }
+};
+   
+int main(){
+	
+	userinfo update;
+
+    fstream sfile("project.txt", ios::in);
+    
+    if(sfile.is_open()){
+        string password;
+        string line;
+        string mk;
+        cout << setw(10) << "Mat khau: ";
+        getline(cin, password);
+        while(getline(sfile, line)){
+            stringstream ss(line);
+            ss >> mk;
+            if(mk == password){
+            	
+                int n;
+                bool x = true;
+                
+                vector<thongtinsach> danhSach; 
+
+                                danhSach.push_back(thongtinsach("001", "Lap trinh C++", "Tieng Viet", "2021", "Viet Nam", "Nguyen Van A", "Giao trinh"));
+                                danhSach.push_back(thongtinsach("002", "Giai tich", "Tieng Anh", "2000", "USA", "ABCD", "Giao trinh"));
+                                danhSach.push_back(thongtinsach("003", "Dai cuong KTMT", "Tieng Viet", "2015", "Viet Nam", "Nguyen Van B", "Giao trinh"));
+                                danhSach.push_back(thongtinsach("004", "Tieng anh B1", "English", "2020", "UK", "EFGH", "Giao trinh"));
+                                danhSach.push_back(thongtinsach("005", "Lap trinh pyton ", "Tieng Viet", "2021", "Viet Nam", "Nguyen Van A", "Giao trinh"));
+                while(x){
+                	cout << setw (50)<< "=========================================================" << endl;
+                	cout << setw (10)<< "||                     MENU                            ||" << endl;
+                	cout << setw (10)<< "||        1. Sach dang co tai thu vien :               ||" << endl; 
+                    cout << setw (10)<< "||        2. Cap nhat thong tin sach :                 ||" << endl;
+                    cout << setw (10)<< "||        3. Xoa sach khoi he thong :                  ||" << endl;
+                    cout << setw (10)<< "||        4. Tim kiem sach :                           ||" << endl;
+                    cout << setw (10)<< "||        5. Them thong tin nguoi doc :                ||" << endl;
+                    cout << setw (10)<< "||        6. Xoa thong tin nguoi doc :                 ||" << endl;
+                    cout << setw (10)<< "||        7. Sua thong tin nguoi doc :                 ||" << endl;
+                    cout << setw (10)<< "||        8. Cap nhat thong tin nguoi muon sach        ||" << endl;
+                    cout << setw (10)<< "||        9. Danh sach nguoi muon sach qua han :       ||" << endl;
+                    cout << setw (10)<< "||        10.Thong tin so luong sach dang cho muon :   ||" << endl;
+                    cout << setw (10)<< "||        0. thoat chuong tring.                       ||" << endl;
+                    cout << setw (10)<< "=========================================================" << endl;
+                    cin >> n;
+                    cin.ignore ();
+                    
+                    if (n == 0){
+                 	x = false ; 
+					 }
+					    else if (n == 1) {
+                           for (int i = 0; i < danhSach.size(); ++i) {
+                             danhSach[i].hienthithongtinsach();
+                             }
+                                } 
+	                    else if (n == 2) {
+                      capNhatThongTinSach(danhSach); 
+                        }
+                        else if (n==3){
+      
+                        xoaSachTheoMa(danhSach);
+                        cout << danhSach.size () ;
+                      }
+                        else if (n==4){ 
+                        timkiemsach(danhSach);
+                        	
+						}
+						else if(n==5){
+                    system("cls");
+                    update.nhap(); 
+                    system("cls");
+                    continue;
+                }
+                else if(n==6){
+                    system("cls");
+                    update.xoa();
+                    system("cls");
+                    continue;
+                }
+                else if(n==7){
+                    system("cls");
+                    update.sua();
+                    system("cls");
+                    continue;
+                } 
+
+	                  } 
+						
+					 } 
+					 
+                 	
+                 };
+                			   
+                 }
+				       else
+                         cout << "file tai khoan chua mo.";
+                             sfile.close();
+				  
+    return 0;
+} 
+
+
+
+
+
+
+
