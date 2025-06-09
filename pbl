@@ -345,6 +345,21 @@ public:
         }
         sfile.close();
     }
+    static void thongKeSoLuongSachDangChoMuon(const string& filename) {
+        ifstream sfile(filename);
+        int count = 0;
+        string line;
+        while (getline(sfile, line)) {
+            stringstream ss(line);
+            string usercode, name, birthdate, phonenumber, borrowdate;
+            ss >> usercode >> name >> birthdate >> phonenumber >> borrowdate;
+            if (!borrowdate.empty()) {
+                count++;
+            }
+        }
+        sfile.close();
+        cout << "So luong sach dang cho muon: " << count << endl;
+    }
 };
 
 int main()
