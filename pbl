@@ -345,7 +345,9 @@ public:
         }
         sfile.close();
     }
-    static void thongKeSoLuongSachDangChoMuon(const string& filename) {
+
+    // in main, part 10
+    void thongKeSoLuongSachDangChoMuon(const string& filename) {
         ifstream sfile(filename);
         int count = 0;
         string line;
